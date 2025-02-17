@@ -27,7 +27,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build Docker Image
-          command: docker build -t $mehdibadami/circleci-test-app:latest .
+          command: docker build -t $DOCKER_USERNAME/circleci-test-app:latest .
 
   push-docker:
     docker:
@@ -37,10 +37,10 @@ jobs:
       - setup_remote_docker
       - run:
           name: Login to Docker Hub
-          command: echo "$dckr_pat_pwTFDfIdozwkXLpihQ3CVODib9E" | docker login -u "$mehdibadami" --password-stdin
+          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - run:
           name: Push Docker Image
-          command: docker push $mehdibadami/circleci-test-app:latest
+          command: docker push $DOCKER_USERNAME/circleci-test-app:latest
 
 workflows:
   version: 2
